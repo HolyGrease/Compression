@@ -10,36 +10,36 @@ import java.util.List;
  *
  */
 public class BitOutputStream {
-    private FileOutputStream fileOutputStream;  // output stream for write to file
-    private int bufferSize;                     // size of buffer
-    private byte[] buffer;                      // buffer for data to write
-    private String bitsQueue;                   // queue used for form the byte
+    private final FileOutputStream fileOutputStream;    // output stream for write to file
+    private final int bufferSize;                       // size of buffer
+    private byte[] buffer;                              // buffer for data to write
+    private String bitsQueue;                           // queue used for form the byte
 
     /**
      *
-     * @param filename
-     * @throws FileNotFoundException
-     * @throws IllegalArgumentException
+     * @param filepath - path to the file
+     * @throws FileNotFoundException if can't find file
+     * @throws IllegalArgumentException if number representation less then bitsNumber
      */
-    public BitOutputStream(String filename) throws FileNotFoundException, IllegalArgumentException {
-        this(new FileOutputStream(filename));
+    public BitOutputStream(String filepath) throws FileNotFoundException, IllegalArgumentException {
+        this(new FileOutputStream(filepath));
     }
 
     /**
      *
-     * @param filename
-     * @param bufferSize
-     * @throws FileNotFoundException
-     * @throws IllegalArgumentException
+     * @param filepath - path to the file
+     * @param bufferSize - size of buffer, in bytes
+     * @throws FileNotFoundException if can't find file
+     * @throws IllegalArgumentException if number representation less then bitsNumber
      */
-    public BitOutputStream(String filename, int bufferSize) throws FileNotFoundException, IllegalArgumentException {
-        this(new FileOutputStream(filename), bufferSize);
+    public BitOutputStream(String filepath, int bufferSize) throws FileNotFoundException, IllegalArgumentException {
+        this(new FileOutputStream(filepath), bufferSize);
     }
 
     /**
      *
-     * @param file
-     * @throws IllegalArgumentException
+     * @param file - file
+     * @throws IllegalArgumentException if number representation less then bitsNumber
      */
     public BitOutputStream(FileOutputStream file) throws IllegalArgumentException {
         this(file, 32);
@@ -47,9 +47,9 @@ public class BitOutputStream {
 
     /**
      *
-     * @param file
-     * @param bufferSize
-     * @throws IllegalArgumentException
+     * @param file - file
+     * @param bufferSize - size of buffer, in bytes
+     * @throws IllegalArgumentException if number representation less then bitsNumber
      */
     public BitOutputStream(FileOutputStream file, int bufferSize) throws IllegalArgumentException {
         if (bufferSize < 4)
@@ -150,7 +150,7 @@ public class BitOutputStream {
     /**
      * Function check if a buffer length
      * reaches max value(bufferSize)
-     * @return
+     * @return true if buffer is full, false - otherwise
      */
     private boolean isBufferFull(){ return  false;}
 

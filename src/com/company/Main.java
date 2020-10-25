@@ -20,7 +20,6 @@ public class Main {
         fileInputStream.read(b);
         fileInputStream.close();
 
-        for (int i = 0; i < b.length; i++)
-            System.out.println(b[i]);
+        for (byte value : b) System.out.println(value);
     }
 }
