@@ -27,4 +27,12 @@ public class BitInputStream {
         fileInputStream = file;
         this.bufferSize = bufferSize;
     }
+
+    public boolean read(){
+        return false;
+    }
+
+    public int read(int bits){
+        return 0;
+    }
 }

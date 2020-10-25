@@ -1,7 +1,5 @@
 package FileStreams;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.List;
