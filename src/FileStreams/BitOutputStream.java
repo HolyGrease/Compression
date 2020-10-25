@@ -19,8 +19,9 @@ public class BitOutputStream {
      *
      * @param filename
      * @throws FileNotFoundException
+     * @throws IllegalArgumentException
      */
-    public BitOutputStream(String filename) throws FileNotFoundException {
+    public BitOutputStream(String filename) throws FileNotFoundException, IllegalArgumentException {
         this(new FileOutputStream(filename));
     }
 
@@ -29,16 +30,18 @@ public class BitOutputStream {
      * @param filename
      * @param bufferSize
      * @throws FileNotFoundException
+     * @throws IllegalArgumentException
      */
-    public BitOutputStream(String filename, int bufferSize) throws FileNotFoundException {
+    public BitOutputStream(String filename, int bufferSize) throws FileNotFoundException, IllegalArgumentException {
         this(new FileOutputStream(filename), bufferSize);
     }
 
     /**
      *
      * @param file
+     * @throws IllegalArgumentException
      */
-    public BitOutputStream(FileOutputStream file){
+    public BitOutputStream(FileOutputStream file) throws IllegalArgumentException {
         this(file, 32);
     }
 
@@ -46,10 +49,13 @@ public class BitOutputStream {
      *
      * @param file
      * @param bufferSize
+     * @throws IllegalArgumentException
      */
-    public BitOutputStream(FileOutputStream file, int bufferSize){
+    public BitOutputStream(FileOutputStream file, int bufferSize) throws IllegalArgumentException {
+        if (bufferSize < 4)
+            throw new IllegalArgumentException("Buffer size can't be less than 4!");
         fileOutputStream = file;
-        bufferSize = bufferSize;
+        this.bufferSize = bufferSize;
     }
 
     /**
