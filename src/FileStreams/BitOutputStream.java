@@ -21,7 +21,7 @@ public class BitOutputStream {
      * @throws FileNotFoundException
      */
     public BitOutputStream(String filename) throws FileNotFoundException {
-        this(filename, 32);
+        this(new FileOutputStream(filename));
     }
 
     /**
@@ -31,8 +31,25 @@ public class BitOutputStream {
      * @throws FileNotFoundException
      */
     public BitOutputStream(String filename, int bufferSize) throws FileNotFoundException {
-        fileOutputStream = new FileOutputStream(filename);
-        this.bufferSize = bufferSize;
+        this(new FileOutputStream(filename), bufferSize);
+    }
+
+    /**
+     *
+     * @param file
+     */
+    public BitOutputStream(FileOutputStream file){
+        this(file, 32);
+    }
+
+    /**
+     *
+     * @param file
+     * @param bufferSize
+     */
+    public BitOutputStream(FileOutputStream file, int bufferSize){
+        fileOutputStream = file;
+        bufferSize = bufferSize;
     }
 
     /**
