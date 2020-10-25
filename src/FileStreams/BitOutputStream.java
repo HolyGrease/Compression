@@ -10,10 +10,10 @@ import java.util.List;
  *
  */
 public class BitOutputStream {
-    private FileOutputStream fileOutputStream;
-    private int bufferSize;
-    private byte[] buffer;
-    private String bitsQueue;
+    private FileOutputStream fileOutputStream;  // output stream for write to file
+    private int bufferSize;                     // size of buffer
+    private byte[] buffer;                      // buffer for data to write
+    private String bitsQueue;                   // queue used for form the byte
 
     /**
      *
@@ -36,75 +36,103 @@ public class BitOutputStream {
     }
 
     /**
-     *
-     * @param bit
+     * Function push single bit to queue
+     * Then check queue for a formed byte
+     * if byte is ready - push this byte to buffer
+     * @param bit - single bit (true - 1, false - 0)
      */
     public void write(boolean bit){
     }
 
     /**
-     *
-     * @param bits
+     *  Function push list of bits to queue
+     *  Then check queue for a formed byte
+     *  if byte is ready - push this byte to buffer
+     * @param bits - list of bits
      */
     public void write(List<Boolean> bits){
 
     }
 
     /**
-     *
-     * @param number
-     * @param bitsNumber
+     * Function push number to queue
+     * Number represents in binary code
+     * Binary code expands to bitsNumber
+     * by adding 0 to the beginning
+     * @param number - number
+     * @param bitsNumber - length of binary code
+     * @throws IllegalArgumentException if number representation less then bitsNumber
      */
-    public void write(int number, int bitsNumber){
-
+    public void write(int number, int bitsNumber) throws IllegalArgumentException {
     }
 
     /**
-     *
+     * Flush queue and buffer
+     * Write information about the length of last binary code
+     * (number of actual bits of last byte)
+     * Close output stream
      */
     public void close(){
 
     }
 
     /**
-     *
-     * @param bit
+     * Function add single bit to queue
+     * @param bit - bit to push to queue
      */
     private void pushQueue(boolean bit){
 
     }
 
     /**
-     *
-     * @param bits
+     * Function add binary code to queue
+     * @param bits - binary code represented as a string
      */
     private void pushQueue(String bits){
 
     }
 
     /**
-     *
-     * @return
+     * Function check if a queue contains full byte
+     * @return true if byte is ready, false - otherwise
      */
     private boolean isQueueFull(){
         return false;
     }
 
     /**
-     *
+     * Function convert binary code to byte
+     * @param bits - binary code
+     * @return binary code converted to byte
      */
-    private void pushBuffer(){
+    private byte convert(String bits){
+        return 0;
+    }
+
+    /**
+     * Function move full byte to buffer
+     */
+    private void flushQueue(){
 
     }
 
     /**
-     *
+     * Function add byte to buffer
+     * @param b - byte to push to buffer
+     */
+    private void pushBuffer(byte b){
+
+    }
+
+    /**
+     * Function check if a buffer length
+     * reaches max value(bufferSize)
      * @return
      */
     private boolean isBufferFull(){ return  false;}
 
     /**
-     *
+     * Function write buffer to file
      */
     private void flushBuffer(){
 
