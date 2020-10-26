@@ -8,21 +8,24 @@ import java.util.List;
  *
  */
 public class BitOutputStream {
-    private final FileOutputStream fileOutputStream;    // Output stream for write to file
-    private final int bufferSize;                       // Size of buffer
-    private byte[] buffer;                              // Buffer for data to write
-    private int current;                                // Index of first empty buffer byte
-                                                        // (set where to write next byte)
-    private String bitsQueue;                           // Queue used for form the byte
+    private static final int defaultBufferSize = 32;                // Default size of buffer
+    private static final int minBufferSize = 4;                     // Min size of buffer
+
+    private final FileOutputStream fileOutputStream;                // Output stream for write to file
+    private final int bufferSize;                                   // Size of buffer
+    private byte[] buffer;                                          // Buffer for data to write
+    private int current;                                            // Index of first empty buffer byte
+                                                                    // (set where to write next byte)
+    private String bitsQueue;                                       // Queue used for form the byte
 
     /**
      *
      * @param filepath - path to the file
      * @throws FileNotFoundException if can't find file
-     * @throws IllegalArgumentException if number representation less then bitsNumber
+     * @throws IllegalArgumentException if bufferSize less than minBufferSize
      */
     public BitOutputStream(String filepath) throws FileNotFoundException, IllegalArgumentException {
-        this(new FileOutputStream(filepath));
+        this(filepath, defaultBufferSize);
     }
 
     /**
@@ -30,7 +33,7 @@ public class BitOutputStream {
      * @param filepath - path to the file
      * @param bufferSize - size of buffer, in bytes
      * @throws FileNotFoundException if can't find file
-     * @throws IllegalArgumentException if number representation less then bitsNumber
+     * @throws IllegalArgumentException if bufferSize less than minBufferSize
      */
     public BitOutputStream(String filepath, int bufferSize) throws FileNotFoundException, IllegalArgumentException {
         this(new FileOutputStream(filepath), bufferSize);
@@ -39,21 +42,21 @@ public class BitOutputStream {
     /**
      *
      * @param file - file
-     * @throws IllegalArgumentException if number representation less then bitsNumber
+     * @throws IllegalArgumentException if bufferSize less than minBufferSize
      */
     public BitOutputStream(FileOutputStream file) throws IllegalArgumentException {
-        this(file, 32);
+        this(file, defaultBufferSize);
     }
 
     /**
      *
      * @param file - file
      * @param bufferSize - size of buffer, in bytes
-     * @throws IllegalArgumentException if number representation less then bitsNumber
+     * @throws IllegalArgumentException if bufferSize less than minBufferSize
      */
     public BitOutputStream(FileOutputStream file, int bufferSize) throws IllegalArgumentException {
-        if (bufferSize < 4)
-            throw new IllegalArgumentException("Buffer size can't be less than 4!");
+        if (bufferSize < minBufferSize)
+            throw new IllegalArgumentException("Buffer size can't be less than " + minBufferSize + "!");
         fileOutputStream = file;
         this.bufferSize = bufferSize;
     }
