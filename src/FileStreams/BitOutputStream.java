@@ -24,7 +24,7 @@ public class BitOutputStream {
      * @throws FileNotFoundException if can't find file
      * @throws IllegalArgumentException if bufferSize less than minBufferSize
      */
-    public BitOutputStream(String filepath) throws FileNotFoundException, IllegalArgumentException {
+    public BitOutputStream(String filepath) throws FileNotFoundException {
         this(filepath, defaultBufferSize);
     }
 
@@ -44,7 +44,7 @@ public class BitOutputStream {
      * @param file - file
      * @throws IllegalArgumentException if bufferSize less than minBufferSize
      */
-    public BitOutputStream(FileOutputStream file) throws IllegalArgumentException {
+    public BitOutputStream(FileOutputStream file) {
         this(file, defaultBufferSize);
     }
 
