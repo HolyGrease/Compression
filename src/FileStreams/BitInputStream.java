@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class BitInputStream {
+    //some comment
     private static final int defaultBufferSize = 32;                // Default size of buffer
     private static final int minBufferSize = 4;                     // Min size of buffer
 
