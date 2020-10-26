@@ -4,10 +4,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class BitInputStream {
-    private final FileInputStream fileInputStream;      //
-    private final int bufferSize;                       //
-    private byte[] buffer;                              //
-    private String bitsQueue;                           //
+    private final FileInputStream fileInputStream;      // Input stream to read from file
+    private final int bufferSize;                       // Size of buffer
+    private byte[] buffer;                              // Buffer for data from file
+    private int next;                                   // Index of next byte of buffer to read
+                                                        // (set which byte will be read next)
+    private String bitsQueue;                           // Queue used for form bits from byte
 
     public BitInputStream(String filename) throws FileNotFoundException {
         this(new FileInputStream(filename));

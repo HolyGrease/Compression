@@ -8,10 +8,12 @@ import java.util.List;
  *
  */
 public class BitOutputStream {
-    private final FileOutputStream fileOutputStream;    // output stream for write to file
-    private final int bufferSize;                       // size of buffer
-    private byte[] buffer;                              // buffer for data to write
-    private String bitsQueue;                           // queue used for form the byte
+    private final FileOutputStream fileOutputStream;    // Output stream for write to file
+    private final int bufferSize;                       // Size of buffer
+    private byte[] buffer;                              // Buffer for data to write
+    private int current;                                // Index of first empty buffer byte
+                                                        // (set where to write next byte)
+    private String bitsQueue;                           // Queue used for form the byte
 
     /**
      *

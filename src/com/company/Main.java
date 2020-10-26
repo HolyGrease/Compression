@@ -28,11 +28,12 @@ public class Main {
         another = (byte)(some | number);
         System.out.println(Integer.toBinaryString(some));
         System.out.println(Integer.toBinaryString(another));
-
-        byte c = Byte.parseByte("01111111", 2);
+        // Get byte from binary string
+        byte c = Byte.parseByte("0011111", 2);
         System.out.println(c);
-
-        byte d = -128;
-        System.out.println(Byte.toString(d));
+        // Get binary string from byte
+        String string = Integer.toBinaryString(c);
+        string = "0000000".substring(string.length()) + string;
+        System.out.println(string);
     }
 }
