@@ -88,4 +88,59 @@ class BitOutputStreamTest {
         for (int i = 0; i < expected.length; i++)
             Assert.assertEquals(expected[i], actual[i]);
     }
+
+    @Test
+    public void write1MbFileBySingleBit() throws IOException {
+        String filename = "src\\tests\\files\\write1MbFileBySingleBit.test";
+        BitOutputStream output = new BitOutputStream(filename);
+
+        for (int i = 0; i < 80000000; i++)
+            output.write(true);
+
+        output.close();
+    }
+
+    @Test
+    public void write10MbFileBySingleBit() throws IOException {
+        String filename = "src\\tests\\files\\write10MbFileBySingleBit.test";
+        BitOutputStream output = new BitOutputStream(filename);
+
+        for (int i = 0; i < 800000000; i++)
+            output.write(true);
+
+        output.close();
+    }
+
+    @Test
+    public void write1MbFile() throws IOException {
+        String filename = "src\\tests\\files\\write1MbFile.test";
+        BitOutputStream output = new BitOutputStream(filename);
+
+        for (int i = 0; i < 10000000; i++)
+            output.write(127, 8);
+
+        output.close();
+    }
+
+    @Test
+    public void write10MbFile() throws IOException {
+        String filename = "src\\tests\\files\\write10MbFile.test";
+        BitOutputStream output = new BitOutputStream(filename);
+
+        for (int i = 0; i < 100000000; i++)
+            output.write(127, 8);
+
+        output.close();
+    }
+
+    //@Test
+    public void write100MbFile() throws IOException {
+        String filename = "src\\tests\\files\\write100MbFile.test";
+        BitOutputStream output = new BitOutputStream(filename, 2048);
+
+        for (int i = 0; i < 1000000000; i++)
+            output.write(127, 8);
+
+        output.close();
+    }
 }
