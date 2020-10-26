@@ -37,11 +37,11 @@ public class BitInputStream {
         return true;
     }
 
-    public boolean read(){
+    public boolean read() {
         return false;
     }
 
-    public int read(int bits){
+    public int read(int bits) {
         return 0;
     }
 
