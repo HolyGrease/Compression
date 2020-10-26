@@ -9,6 +9,8 @@ public class Main {
     public static void main(String[] args) throws IOException {
         String filename = "temp.txt";
 
+        System.out.println(("1234").substring(0, 2));
+
         byte[] a = {-128, -1, 2, 3, 127};
 
         FileOutputStream fileOutputStream = new FileOutputStream(filename);
@@ -16,11 +18,13 @@ public class Main {
         fileOutputStream.close();
 
         FileInputStream fileInputStream = new FileInputStream(filename);
-        byte[] b = new byte[5];
-        fileInputStream.read(b);
+        byte[] b = new byte[6];
+        int readed = fileInputStream.read(b);
+        System.out.println(readed);
         fileInputStream.close();
 
         for (byte value : b) System.out.println(value);
+        System.out.println();
 
         byte some = 0;
         int number = 128;
