@@ -21,5 +21,18 @@ public class Main {
         fileInputStream.close();
 
         for (byte value : b) System.out.println(value);
+
+        byte some = 0;
+        int number = 128;
+        byte another;
+        another = (byte)(some | number);
+        System.out.println(Integer.toBinaryString(some));
+        System.out.println(Integer.toBinaryString(another));
+
+        byte c = Byte.parseByte("01111111", 2);
+        System.out.println(c);
+
+        byte d = -128;
+        System.out.println(Byte.toString(d));
     }
 }

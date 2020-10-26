@@ -28,11 +28,35 @@ public class BitInputStream {
         this.bufferSize = bufferSize;
     }
 
+    public boolean isEndOfFile(){
+        return true;
+    }
+
     public boolean read(){
         return false;
     }
 
     public int read(int bits){
         return 0;
+    }
+
+    public void close(){
+
+    }
+
+    private boolean isQueueFullEnough(int bits){
+        return false;
+    }
+
+    private void pushQueue(){
+
+    }
+
+    private boolean isBufferFullEnough(){
+        return false;
+    }
+
+    private void pushBuffer(){
+
     }
 }
