@@ -36,7 +36,7 @@ class BitOutputStreamTest {
 
         for (byte b: expected){
             String string = Integer.toBinaryString(b);
-            string = "0000000".substring(string.length()) + string;
+            string = "00000000".substring(string.length()) + string;
 
             for (int i = 0; i < string.length(); i++)
                 output.write(string.charAt(i) == '1');
@@ -71,6 +71,27 @@ class BitOutputStreamTest {
     }
 
     @Test
+    public void writeNumberInBiggerBits() throws IOException {
+        String filename = "src\\tests\\files\\writeNumberInBiggerBits.test";
+        BitOutputStream output = new BitOutputStream(filename);
+        byte expected1 = 1;
+        byte expected2 = 63;
+        int bitsNumber = 14;
+        byte number = 127;
+
+        output.write(number, bitsNumber);
+
+        output.close();
+
+        FileInputStream input = new FileInputStream(filename);
+        int actual1 = input.read();
+        int actual2 = input.read();
+
+        Assert.assertEquals(expected1, actual1);
+        Assert.assertEquals(expected2, actual2);
+    }
+
+    @Test
     public void writeSomeNumbersByBits() throws IOException {
         String filename = "src\\tests\\files\\writeSomeNumberByBits.test";
         BitOutputStream output = new BitOutputStream(filename);
@@ -87,6 +108,48 @@ class BitOutputStreamTest {
 
         for (int i = 0; i < expected.length; i++)
             Assert.assertEquals(expected[i], actual[i]);
+    }
+
+    @Test void writeSingleByte() throws IOException {
+        String filename = "src\\tests\\files\\writeSingleByte.test";
+        BitOutputStream output = new BitOutputStream(filename);
+        byte expected1 = 127;
+        byte expected2 = 8;
+        byte expected3 = -1;
+        int bitsNumber = 8;
+        byte number = 127;
+
+        output.write(number, bitsNumber);
+
+        output.close();
+
+        FileInputStream input = new FileInputStream(filename);
+        int actual1 = input.read();
+        int actual2 = input.read();
+        int actual3 = input.read();
+
+        Assert.assertEquals(expected1, actual1);
+        Assert.assertEquals(expected2, actual2);
+        Assert.assertEquals(expected3, actual3);
+    }
+
+    @Test
+    public void bitsToRead() throws IOException {
+        String filename = "src\\tests\\files\\bitsToRead.test";
+        BitOutputStream output = new BitOutputStream(filename);
+        byte expected = 7;
+        int bitsNumber = 7;
+        byte number = 63;
+
+        output.write(number, bitsNumber);
+
+        output.close();
+
+        FileInputStream input = new FileInputStream(filename);
+        input.read();
+        int actual = input.read();
+
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -116,8 +179,10 @@ class BitOutputStreamTest {
         String filename = "src\\tests\\files\\write1MbFile.test";
         BitOutputStream output = new BitOutputStream(filename);
 
-        for (int i = 0; i < 10000000; i++)
+        for (int i = 0; i < 1000000; i++){
+            //System.out.println(i);
             output.write(127, 8);
+        }
 
         output.close();
     }
@@ -136,7 +201,7 @@ class BitOutputStreamTest {
     //@Test
     public void write100MbFile() throws IOException {
         String filename = "src\\tests\\files\\write100MbFile.test";
-        BitOutputStream output = new BitOutputStream(filename, 2048);
+        BitOutputStream output = new BitOutputStream(filename);
 
         for (int i = 0; i < 1000000000; i++)
             output.write(127, 8);
