@@ -157,7 +157,7 @@ class BitOutputStreamTest {
         String filename = "src\\tests\\files\\write1MbFileBySingleBit.test";
         BitOutputStream output = new BitOutputStream(filename);
 
-        for (int i = 0; i < 80000000; i++)
+        for (int i = 0; i < 8000000; i++)
             output.write(true);
 
         output.close();
@@ -168,7 +168,7 @@ class BitOutputStreamTest {
         String filename = "src\\tests\\files\\write10MbFileBySingleBit.test";
         BitOutputStream output = new BitOutputStream(filename);
 
-        for (int i = 0; i < 800000000; i++)
+        for (int i = 0; i < 80000000; i++)
             output.write(true);
 
         output.close();
@@ -192,18 +192,18 @@ class BitOutputStreamTest {
         String filename = "src\\tests\\files\\write10MbFile.test";
         BitOutputStream output = new BitOutputStream(filename);
 
-        for (int i = 0; i < 100000000; i++)
+        for (int i = 0; i < 10000000; i++)
             output.write(127, 8);
 
         output.close();
     }
 
-    //@Test
+    @Test
     public void write100MbFile() throws IOException {
         String filename = "src\\tests\\files\\write100MbFile.test";
         BitOutputStream output = new BitOutputStream(filename);
 
-        for (int i = 0; i < 1000000000; i++)
+        for (int i = 0; i < 100000000; i++)
             output.write(127, 8);
 
         output.close();
