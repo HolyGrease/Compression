@@ -69,7 +69,7 @@ public class BitOutputStream {
      * @param bit - single bit (true - 1, false - 0)
      */
     public void write(boolean bit) throws IOException {
-        pushBuffer(bit);
+
     }
 
     /**
@@ -77,8 +77,7 @@ public class BitOutputStream {
      * @param bits - list of bits
      */
     public void write(List<Boolean> bits) throws IOException {
-        for (boolean bit: bits)
-            pushBuffer(bit);
+
     }
 
     /**
@@ -91,10 +90,7 @@ public class BitOutputStream {
      * @throws IllegalArgumentException if number representation less then bitsNumber
      */
     public void write(int number, int bitsNumber) throws IllegalArgumentException, IOException {
-        for (int i = 0; i < bitsNumber; i++) {
-            boolean bit = ((number >>> (bitsNumber - i - 1)) & 1) == 1;
-            pushBuffer(bit);
-        }
+
     }
 
     /**
@@ -104,17 +100,7 @@ public class BitOutputStream {
      * Close output stream
      */
     public void close() throws IOException {
-        int len = n;
 
-        if (n != 0)
-            current++;
-        if (current != 0)
-            flushBuffer();
-
-        if (len == 0)
-            len = 8;
-        fileOutputStream.write(len);
-        fileOutputStream.close();
     }
 
     /**
@@ -122,15 +108,7 @@ public class BitOutputStream {
      * @param b - bit to push to buffer
      */
     private void pushBuffer(boolean b) throws IOException {
-        buffer[current] <<= 1;
-        if (b) buffer[current] |= 1;
-        n++;
-        if (isByteFull()) {
-            n = 0;
-            current++;
-        }
-        if (isBufferFull())
-            flushBuffer();
+
     }
 
     /**
@@ -139,7 +117,7 @@ public class BitOutputStream {
      * @return true if byte contains 8 bis, false - otherwise
      */
     private boolean isByteFull() {
-        return n == byteSize;
+
     }
 
     /**
@@ -148,15 +126,13 @@ public class BitOutputStream {
      * @return true if buffer is full, false - otherwise
      */
     private boolean isBufferFull(){
-        return current == bufferSize;
+
     }
 
     /**
      * Function write buffer to file
      */
     private void flushBuffer() throws IOException {
-        fileOutputStream.write(buffer, 0, current);
-        buffer = new byte[bufferSize];
-        current = 0;
+
     }
 }
