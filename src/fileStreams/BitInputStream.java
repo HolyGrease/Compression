@@ -1,4 +1,4 @@
-package FileStreams;
+package fileStreams;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -14,9 +14,10 @@ public class BitInputStream {
     private int current;                                            // Index of current byte of buffer to read
                                                                     // (set which byte will be read next)
     private int n = byteSize;                                       // Number of bits read from byte
-    private boolean endOfFile = false;
-    private int left = -1;
-    private int bitsInLastByte;
+    private boolean endOfFile = false;                              // Flag of getting to end of file
+    private int left = -1;                                          // Bytes left to read
+                                                                    // (init when find end of file)
+    private int bitsInLastByte;                                     // Number of bits in last byte
 
     public BitInputStream(String filename) throws IOException {
         this(filename, defaultBufferSize);
@@ -39,14 +40,30 @@ public class BitInputStream {
         pushBuffer();
     }
 
+    /**
+     * Function
+     * @return
+     */
     public boolean isEmpty(){
         return endOfFile && current == left;
     }
 
+    /**
+     * Function read from buffer single bit
+     * @return bit, if 1 - true, 0 - fasle
+     * @throws IOException
+     */
     public boolean read() throws IOException {
         return readFromBuffer();
     }
 
+    /**
+     *  Function read some bits from buffer
+     *  and convert them to integer
+     * @param bits - number of bits to read
+     * @return number
+     * @throws IOException
+     */
     public int read(int bits) throws IOException {
         if (isEmpty())
             return -1;
@@ -60,10 +77,18 @@ public class BitInputStream {
         return number;
     }
 
+    /**
+     *
+     * @throws IOException
+     */
     public void close() throws IOException {
         fileInputStream.close();
     }
 
+    /**
+     *
+     * @param read
+     */
     private void onEndOfFile(int read) {
         endOfFile = true;
         if (current == 0)
@@ -71,23 +96,29 @@ public class BitInputStream {
         else
             left = read - 1 + bufferSize - current;
         bitsInLastByte = buffer[left];
-
-        for (int b: buffer)
-            System.out.print(b + " ");
-        System.out.println();
-        System.out.println(current);
-        System.out.println(left);
-        System.out.println(bitsInLastByte);
     }
 
+    /**
+     *
+     * @return
+     */
     private boolean isByteRead(){
         return n == 0;
     }
 
+    /**
+     *
+     * @return
+     */
     private boolean isBufferFullEnough() {
         return (bufferSize - current > 3) || endOfFile;
     }
 
+    /**
+     * Function fill buffer by
+     * reading data from file
+     * @throws IOException
+     */
     private void pushBuffer() throws IOException {
         int read;
         if (current == 0)
@@ -103,6 +134,11 @@ public class BitInputStream {
         current = 0;
     }
 
+    /**
+     * Function get from buffer single bit
+     * @return bit
+     * @throws IOException
+     */
     private boolean readFromBuffer() throws IOException {
         if (!isBufferFullEnough())
             pushBuffer();

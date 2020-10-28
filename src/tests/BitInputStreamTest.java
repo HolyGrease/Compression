@@ -1,7 +1,7 @@
 package tests;
 
-import FileStreams.BitInputStream;
-import FileStreams.BitOutputStream;
+import fileStreams.BitInputStream;
+import fileStreams.BitOutputStream;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
@@ -44,13 +44,8 @@ class BitInputStreamTest {
 
         BitInputStream input = new BitInputStream(filename);
 
-        int actual = 0;
+        int actual = input.read(17);
 
-        for (int i = 0; i < 17; i++){
-            boolean bit = input.read();
-            actual <<= 1;
-            if (bit) actual |= 1;
-        }
         System.out.println(Integer.toBinaryString(expected));
         System.out.println(Integer.toBinaryString(actual));
 

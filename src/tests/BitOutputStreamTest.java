@@ -1,12 +1,10 @@
 package tests;
 
-import FileStreams.BitOutputStream;
+import fileStreams.BitOutputStream;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class BitOutputStreamTest {
 
